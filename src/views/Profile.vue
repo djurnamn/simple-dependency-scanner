@@ -87,6 +87,15 @@ export default {
 		}
 	},
 
+	computed: {
+		/**
+		 * Check if user is logged in
+		 */
+		loggedIn() {
+			return this.$store.state.auth.status.loggedIn
+		}
+	},
+
 	created() {
 		/**
 		 * If user is not logged in send them to the login view
