@@ -35,3 +35,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - Comment script block on the Profile view
 - Look into a simple way to run server on a secure connection
 - Implement a dark mode switch and create a smart invertable system for grays
+- Store files in localStorage so that the user can leave the Scan view after finished scan and while they wait
+- Use vue-number-animation to animate the progress percentages
+- Add a pulsating effect to the progress bars
