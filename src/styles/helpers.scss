@@ -1,0 +1,306 @@
+// As this is included in each view it should only make variables,
+// functions and mixins available – not output any styles.
+
+/**
+ * Bolts configuration variables
+ */
+$bolts-reset-list-styles: true;
+$bolts-reset-focus-styles: true;
+$bolts-default-background-size: cover;
+$bolts-default-background-position: 50% 50%;
+$bolts-default-transition-duration: 0.2s;
+$bolts-default-transition-easing: ease-in-out;
+$bolts-breakpoints: (
+	small: 480px,
+	medium: 768px,
+	large: 1024px 
+);
+
+@import '~bolts-lib/src/sass/bolts';
+
+/**
+ * Variables
+ */
+
+$color-white: #ffffff;
+$color-black: #333333;
+$color-light-gray: #f4f4f4;
+
+$color-brand-primary: #5454ec;
+$color-brand-secondary: #54eca0;
+
+$color-context-positive: #54ec54;
+$color-context-negative: #ec5454;
+
+/**
+ * Mixins
+ */
+
+@mixin contain {
+	@media (width-to(medium)) {
+		padding: 20px;
+	}
+
+	@media (width-from(medium)) {
+		padding: 0 50px;
+
+		> * {
+			max-width: 1280px;
+			margin: 25px auto;
+		}
+	}
+}
+
+@mixin field {
+	position: relative;
+
+	&:not(:first-child) {
+		margin-top: -2px;
+	}
+
+	&:first-child &-input {
+		border-radius: 10px 10px 0 0;
+	}
+
+	&.has-error &-input {
+		border-color: $color-context-negative;
+	}
+
+	&:not(.has-error) &-error {
+		display: none;
+	}
+
+	&-message {
+		@extend %message;
+		margin-bottom: 20px;
+		background-color: $color-context-negative;
+		color: $color-white;
+		@include antialias;
+	}
+
+	&-input {
+		display: block;
+		width: 100%;
+		font-size: 20px;
+		padding: 18px;
+		border: 2px solid $color-light-gray;
+
+		&[readonly] {
+			cursor: not-allowed;
+			background-color: rgba($color-light-gray, 0.25);
+			color: rgba($color-black, 0.75);
+		}
+	}
+
+	&-error {
+		padding: 5px 10px;
+		background-color: $color-context-negative;
+		color: $color-white;
+		@include antialias;
+		text-align: right;
+		font-weight: 600;
+	}
+}
+
+@mixin button(
+	$background-color: $color-brand-primary,
+	$text-color: $color-white,
+	$group: false,
+	$big: false,
+	$radius: 10px
+) {
+
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	background-color: $background-color;
+	color: $text-color;
+	@include transition(background-color box-shadow text-shadow);
+	@if ($text-color == $color-white) {
+		@include antialias;
+	}
+
+	@if ($big) {
+		padding: 40px;
+	}
+
+	@if ($group) {
+		&:first-child {
+			@if ($big) {
+				border-top-left-radius: $radius;
+				border-top-right-radius: $radius;
+			} @else {
+				border-top-left-radius: $radius;
+				border-bottom-left-radius: $radius;
+			}
+		}
+
+		&:last-child {
+			@if ($big) {
+				border-bottom-left-radius: $radius;
+				border-bottom-right-radius: $radius;
+			} @else {
+				border-top-right-radius: $radius;
+				border-bottom-right-radius: $radius;
+			}
+		}
+	} @else {
+		border-radius: $radius;
+	}
+
+	&:not([disabled]):hover {
+		background-color: darken($background-color, 2%);
+		text-shadow: 0px 0px 4px rgba($color-white, 0.25);
+		@extend %box-shadow;
+	}
+
+	&[disabled] {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+
+	&-icon {
+		margin-right: 5px;
+	}
+
+	&-label {
+		@extend %text-button;
+	}
+}
+
+/**
+ * Animations
+ */
+
+@keyframes rotating {
+	from {
+		transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		-ms-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@-webkit-keyframes rotating {
+	from {
+		transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+/**
+ * Placeholder
+ */
+
+%text-link {
+	font-weight: 600;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+%text-button {
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	font-size: 20px;
+}
+
+%wysiwyg {
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Lato';
+		font-weight: 700;
+		line-height: 1.2;
+
+		&:not(:last-child) {
+			margin-bottom: 20px;
+		}
+	}
+
+	h1 {
+		@media (width-to(medium)) {
+			font-size: 24px;
+		}
+
+		@media (width-from(medium)) {
+			font-size: 48px;
+		}
+	}
+
+	h2 {
+		@media (width-to(medium)) {
+			font-size: 20px;
+		}
+
+		@media (width-from(medium)) {
+			font-size: 36px;
+		}
+	}
+
+	h3 {
+		@media (width-to(medium)) {
+			font-size: 18px;
+		}
+
+		@media (width-from(medium)) {
+			font-size: 32px;
+		}
+	}
+
+	h4 {
+		@media (width-from(medium)) {
+			font-size: 24px;
+		}
+	}
+
+	h5 {
+		@media (width-from(medium)) {
+			font-size: 20px;
+		}
+	}
+
+	p {
+		line-height: 1.6;
+
+		&:not(:first-child) {
+			margin-top: 20px;
+		}
+	}
+
+	a {
+		@extend %text-link;
+		color: $color-brand-primary;
+	}
+}
+
+%box-shadow {
+	box-shadow: inset 0 0 50px 0 rgba($color-black, 0.1);
+}
+
+%message {
+	padding: 5px 10px;
+	border-radius: 5px;
+	text-align: center;
+}
+
+%rotating {
+	-webkit-animation: rotating 1s linear infinite;
+	-moz-animation: rotating 1s linear infinite;
+	-ms-animation: rotating 1s linear infinite;
+	-o-animation: rotating 1s linear infinite;
+	animation: rotating 1s linear infinite;
+}
