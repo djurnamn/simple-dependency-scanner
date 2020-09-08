@@ -122,6 +122,16 @@ export default {
 @import '../styles/helpers';
 
 .login {
+	&-message {
+		padding: 10px;
+		border-radius: 10px 10px 0 0;
+		background-color: $color-context-negative;
+		color: $color-white;
+		@include antialias;
+		font-weight: 600;
+		text-align: center;
+	}
+
 	&-content {
 		@extend %wysiwyg;
 		margin-bottom: 40px;
