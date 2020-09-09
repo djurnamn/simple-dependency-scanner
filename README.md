@@ -38,3 +38,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - Store files in localStorage so that the user can leave the Scan view after finished scan and while they wait
 - Use vue-number-animation to animate the progress percentages
 - Add a pulsating effect to the progress bars
+
+## Credits
+Icons throughout the app are from the [Typicons](https://www.s-ings.com/typicons/) library by Stephen Hutchings
